@@ -25,10 +25,13 @@ public class Solution {
         if(fast==null ||fast.next==null) return null;
 
         slow=head;
+        ListNode prev=null;
         while(fast!=slow) {
             slow=slow.next;
+            prev=fast;
             fast=fast.next;
         }
+        // prev.next=null; // remove cycle
         return slow;
 
         
