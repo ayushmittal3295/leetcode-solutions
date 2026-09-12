@@ -1,24 +1,26 @@
 class Solution {
-    public int rob(int[] nums) {
-        int n = nums.length;
-        if(n==1) return nums[0];
-        int case1=fxn(nums,1,n-1);
-        int case2=fxn(nums,0,n-2);
-        return Math.max(case1, case2);
-
-        
-    }
-
-    public int fxn(int[]nums, int s, int e) {
-        int r=0;
-        int l=0;
+    static int n;
+    public int solve(int nums[], int s, int e) {
+        int p2=0;
+        int p1=0;
         for(int i=s;i<=e;i++) {
-            int curr=Math.max(l,nums[i]+r);
-            r=l;
-            l=curr;
+            int t=nums[i]+p2;
+            int skip=p1;
+            int curr=Math.max(t,skip);
+            p2=p1;
+            p1=curr;
         }
-
-        return l;
+        return p1;
+    }
+    public int rob(int[] nums) {
+        n=nums.length;
+        if(n==1) {
+            return nums[0];
+        }
+        int c1=solve(nums,0,n-2);
+        int c2=solve(nums,1,n-1);
+        return Math.max(c1,c2);
+        
         
     }
     
